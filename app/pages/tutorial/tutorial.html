@@ -1,0 +1,25 @@
+<ion-navbar hideBackButton="true" *navbar primary>
+  <ion-buttons end *ngIf="showSkip">
+    <button (click)="goToNextSlide()" >Next</button>
+  </ion-buttons>
+   <ion-title>Welcome to Pick Pack</ion-title>
+</ion-navbar>
+
+<ion-content>
+  <ion-slides #mySlider [options]="{pager: true, autoplay:5000}" (slideChangeStart)="onSlideChangeStart($event)">
+    <ion-slide *ngFor="let slide of slides">
+      <img [src]="slide.image" class="slide-image"/>
+      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+      <p [innerHTML]="slide.description"></p>
+    </ion-slide>
+    <ion-slide>
+      <img src="img/ica-slidebox-img-4.png" class="slide-image"/>
+      <h2 class="slide-title">Simplified login</h2>
+      <p>Login using <b>Google or Facebook.</b> Save your favorites and access chats!</p>
+      <button large secondary (click)="startApp()">
+        Continue
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

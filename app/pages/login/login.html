@@ -1,0 +1,35 @@
+<ion-header>
+    <!--<ion-navbar>
+        <ion-title>Login</ion-title>
+    </ion-navbar>-->
+</ion-header>
+<ion-content>
+
+    <ion-list inset>
+        <div class="logo">
+            <img src="img/logo.png" class="pickpack-welcome-logo">
+            <h2>Party book,<br> pictures from everywhere</h2>
+        </div>
+
+            <ion-item>
+                <ion-input placeholder="Enter Party ID" [(ngModel)]="partyId"  clearInput></ion-input>
+            </ion-item>
+    </ion-list>
+
+
+     <ion-row responsive-sm class="socialbuttons">
+            <ion-col>
+                <button (click)="facebookLogin()" deepblue block>
+                    <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+                    Login With Facebook</button>
+            </ion-col>
+            <ion-col>
+                <div id="google-signin"></div>
+                <!--<button id="google-signin" deepred block>
+                    <ion-icon ios="logo-google" md="logo-google"></ion-icon>
+                    Login With Google</button>-->
+            </ion-col>
+        </ion-row>
+
+</ion-content>
+

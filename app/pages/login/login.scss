@@ -1,0 +1,71 @@
+
+.login-page .logo {
+  padding: 20px 0;
+  min-height: 200px;
+  text-align: center;
+  background-color:  map-get($map: $colors, $key: yellow);
+  margin-bottom: 10px;
+
+   .pickpack-welcome-logo{
+      max-width: 50%;
+  }
+
+  h2{
+      color: map-get($map: $colors, $key: dpurple);
+  }
+}
+
+.login-page .logo img {
+  max-width: 150px;
+}
+
+
+.login-page .socialbuttons{
+      width:80%;
+      margin-left: 10%;
+      position: absolute;
+      bottom: 2em;
+  }
+
+  .login-page{
+
+     ion-list[inset] > .item:last-child{
+        border-bottom: 1px solid #c8c7cc;
+        background-color: #f4f4f4;
+        }
+
+        ion-input[clearInput] .text-input[placeholder]
+        {
+            text-align: center;
+            height: 50px;
+            font-size: x-large;
+        }
+
+
+ ion-content {
+    position: relative;
+    background: #fff;//map-get($map: $colors, $key: favorite);
+    overflow: hidden;
+}
+/* You could use :after - it doesn't really matter */
+ion-content:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.5;
+    background-image: url(../../img/3061.png);
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+}
+
+.abcRioButton.abcRioButtonBlue {
+    width: 100% !important;
+}
+
+  }

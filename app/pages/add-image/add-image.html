@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Party - {{partyId}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="add-image-page">
+
+  <ion-item-group *ngFor="let pictureInfo of pictures; let index = index">
+         <ion-item-divider light>
+             {{pictureInfo.createdBy}}
+                               <span class="bold">{{pictureInfo.createdByName}}</span>,
+                              <span >{{pictureInfo.timestamp | date:'MM/dd/yyyy hh:mm:ss'}}</span>
+                              </ion-item-divider>
+
+        <ion-item >
+            <div class="grid{{index}}" >
+                <div class="grid-item" *ngFor="let image of pictureInfo.images" ><img [src]="image" /></div>
+            </div>
+        </ion-item>
+ </ion-item-group>
+
+
+
+</ion-content>
+
+<ion-footer>
+
+      <button (click)="selectImage()" main fab fab-right fab-bottom class="action-button">  <ion-icon name="camera"></ion-icon></button>
+      <button (click)="selectPictures()" orange fab fab-left fab-bottom class="action-button">  <ion-icon name="add"></ion-icon></button>
+  </ion-footer>

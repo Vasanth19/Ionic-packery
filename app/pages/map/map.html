@@ -1,0 +1,15 @@
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Map</ion-title>
+    <ion-buttons end>
+    <button (click)="  presentEnableLocationModal()">
+        <ion-icon name="locate"></ion-icon>
+    </button>
+</ion-buttons>
+</ion-navbar>
+
+<ion-content class="map-page">
+  <div id="map"></div>
+</ion-content>
