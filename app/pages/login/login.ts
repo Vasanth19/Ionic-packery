@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 
 declare var firebase: any;
 declare var gapi: any;
+declare var FB:any;
 @Page({
     templateUrl: 'build/pages/login/login.html'
 })
@@ -127,6 +128,9 @@ export class LoginPage {
 
 
 ngAfterViewInit() {
+
+
+   //   FB.Event.subscribe('auth.authResponseChange', this.checkFacebookLoginState);
     // Converts the Google login button stub to an actual button.
     gapi.signin2.render(
       'google-signin',
@@ -137,11 +141,13 @@ ngAfterViewInit() {
         'height': 50,
         'longtitle': true
       });
+
   }
 
   // Triggered after a user successfully logs in using the Google external
   // login provider.
- onGoogleLoginSuccess = (googleUser) => {
+ onGoogleLoginSuccess = (googleUser) =>
+ {
        if (this.partyId === '') {
             this.showToast('Enter the party id');
             return;
@@ -163,6 +169,58 @@ ngAfterViewInit() {
         this.saveUser(this.user);
     });
   }
+
+facebookLoginManually(){
+     FB.login(function(response) {
+  console.log(response);
+     }, {scope: 'public_profile,email'});
+}
+
+  checkFacebookLoginState = (event) =>{
+  if (event.authResponse) {
+    // User is signed-in Facebook.
+    var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
+      unsubscribe();
+      // Check if we are already signed-in Firebase with the correct user.
+      if (!isUserEqual(event.authResponse, firebaseUser)) {
+        // Build Firebase credential with the Facebook auth token.
+        var credential = firebase.auth.FacebookAuthProvider.credential(
+            event.authResponse.accessToken);
+        // Sign in with the credential from the Facebook user.
+        firebase.auth().signInWithCredential(credential).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          // ...
+        });
+      } else {
+        // User is already signed-in Firebase with the correct user.
+      }
+    });
+  } else {
+    // User is signed-out of Facebook.
+    firebase.auth().signOut();
+  }
+
+  function isUserEqual(facebookAuthResponse, firebaseUser) {
+  if (firebaseUser) {
+    var providerData = firebaseUser.providerData;
+    for (var i = 0; i < providerData.length; i++) {
+      if (providerData[i].providerId === firebase.auth.FacebookAuthProvider.PROVIDER_ID &&
+          providerData[i].uid === facebookAuthResponse.userID) {
+        // We don't need to re-auth the Firebase connection.
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+}
 
 
     onGoogleAuthSignIn(googleUser) {
